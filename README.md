@@ -1,6 +1,6 @@
 # ITE EC Reader 
 
-Uses WinRing0 to access the entire EC Chip, currently for ITE only.
+Uses WinRing0 to access the entire EC Chip, first of it's kind (probably), currently for ITE only.
 
 Use the Up & Down keys to navigate.
 
