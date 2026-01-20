@@ -1,6 +1,6 @@
 # ITE EC Reader 
 
-Uses WinRing0 to access the entire EC Chip, first of it's kind, currently for ITE only.
+Uses PawnIO (which is a safe and certified driver) to access the entire EC Chip, first of it's kind, currently for ITE only.
 
 Use the Up & Down keys to navigate.
 
