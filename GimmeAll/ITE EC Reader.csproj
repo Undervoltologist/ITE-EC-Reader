@@ -11,25 +11,26 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <None Remove="Resources\LpcIO.bin" />
+    <None Remove="Resources\PawnIO.sys" />
+    <None Remove="Resources\WinRing0x64.dll" />
+    <None Remove="Resources\WinRing0x64.exp" />
+    <None Remove="Resources\WinRing0x64.sys" />
+  </ItemGroup>
+
+  <ItemGroup>
     <Content Include="chip.ico" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <EmbeddedResource Include="Resources\LpcIO.bin" />
+    <EmbeddedResource Include="Resources\PawnIO.sys" />
   </ItemGroup>
 
   <ItemGroup>
 	  <None Include="..\..\..\..\Downloads\image (1).png">
 	    <Pack>True</Pack>
 	    <PackagePath>\</PackagePath>
-	  </None>
-	  <None Include="Resources\WinRing0x64.dll">
-		  <Link>WinRing0x64.dll</Link>
-		  <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-	  </None>
-	  <None Include="Resources\WinRing0x64.sys">
-		  <Link>WinRing0x64.sys</Link>
-		  <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-	  </None>
-	  <None Include="Resources\WinRing0x64.exp">
-		  <Link>WinRing0x64.exp</Link>
-		  <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
 	  </None>
   </ItemGroup>
 

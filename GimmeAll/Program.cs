@@ -31,9 +31,9 @@ public class Program
         SetupConsole();
         Console.Title = "ITE EC Reader";
 
-        WinRing0.WinRingInitOk = WinRing0.InitializeOls();
+        PawnIO.Initialize();
 
-        if (WinRing0.WinRingInitOk)
+        if (PawnIO.IsInitialized)
         {
             if (!File.Exists("config.json")) globalVariables.SaveToFile("config.json");
             globalVariables = GlobalVariables.LoadFromFile("config.json");
@@ -73,13 +73,13 @@ public class Program
 
                 lock (_ecAccessLock)
                 {
-                    currentData = WinRing0.DirectEcReadArray(globalVariables.ActiveAddr, globalVariables.ActiveData, addr, 0x100);
+                    currentData = PawnIO.DirectEcReadArray(globalVariables.ActiveAddr, globalVariables.ActiveData, addr, 0x100);
 
                     // If 0xFF, try secondary ports
                     if (currentData.All(b => b == 0xFF))
                     {
                         globalVariables.UseSecondaryPorts = !globalVariables.UseSecondaryPorts;
-                        currentData = WinRing0.DirectEcReadArray(globalVariables.ActiveAddr, globalVariables.ActiveData, addr, 0x100);
+                        currentData = PawnIO.DirectEcReadArray(globalVariables.ActiveAddr, globalVariables.ActiveData, addr, 0x100);
 
                         // If still 0xFF on both port sets, stop reading
                         if (currentData.All(b => b == 0xFF))
@@ -97,7 +97,7 @@ public class Program
                 await Task.Delay(10);
             }
         }
-        WinRing0.DeinitializeOls();
+        PawnIO.Close();
         _singleInstanceMutex?.ReleaseMutex();
         Console.ReadLine();
     }
@@ -130,13 +130,13 @@ public class Program
 
         lock (_ecAccessLock)
         {
-            var idData = WinRing0.DirectEcReadArray(globalVariables.ActiveAddr, globalVariables.ActiveData, 0x2000, 3);
+            var idData = PawnIO.DirectEcReadArray(globalVariables.ActiveAddr, globalVariables.ActiveData, 0x2000, 3);
             chipIdHex = $"{idData[0]:X2}{idData[1]:X2}";
             chipRev = idData[2];
-            ctr0 = WinRing0.DirectEcRead(globalVariables.ActiveAddr, globalVariables.ActiveData, 0x1801);
-            dcr4 = WinRing0.DirectEcRead(globalVariables.ActiveAddr, globalVariables.ActiveData, 0x1806);
-            dcr5 = WinRing0.DirectEcRead(globalVariables.ActiveAddr, globalVariables.ActiveData, 0x1807);
-            dcr6 = WinRing0.DirectEcRead(globalVariables.ActiveAddr, globalVariables.ActiveData, 0x1808);
+            ctr0 = PawnIO.DirectEcRead(globalVariables.ActiveAddr, globalVariables.ActiveData, 0x1801);
+            dcr4 = PawnIO.DirectEcRead(globalVariables.ActiveAddr, globalVariables.ActiveData, 0x1806);
+            dcr5 = PawnIO.DirectEcRead(globalVariables.ActiveAddr, globalVariables.ActiveData, 0x1807);
+            dcr6 = PawnIO.DirectEcRead(globalVariables.ActiveAddr, globalVariables.ActiveData, 0x1808);
             rpm0 = GetRpm(0x181E, 0x181F);
             rpm1 = GetRpm(0x1820, 0x1821);
             rpm2 = GetRpm(0x1845, 0x1846);
@@ -224,8 +224,8 @@ public class Program
 
     private static int GetRpm(ushort lowAddr, ushort hiAddr)
     {
-        byte low = WinRing0.DirectEcRead(globalVariables.ActiveAddr, globalVariables.ActiveData, lowAddr);
-        byte hi = WinRing0.DirectEcRead(globalVariables.ActiveAddr, globalVariables.ActiveData, hiAddr);
+        byte low = PawnIO.DirectEcRead(globalVariables.ActiveAddr, globalVariables.ActiveData, lowAddr);
+        byte hi = PawnIO.DirectEcRead(globalVariables.ActiveAddr, globalVariables.ActiveData, hiAddr);
         int combined = low + (hi << 8);
         if (combined <= 0 || combined == 0xFFFF) return 0;
         return 2156250 / combined; // divide by 0x2E6DA to get RPM
