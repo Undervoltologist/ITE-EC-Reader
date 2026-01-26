@@ -1,6 +1,6 @@
 # ITE EC Reader 
 
-Uses PawnIO (which is a safe and certified driver) to access the entire EC Chip, currently for ITE. (might work for other EC chips as well)
+Uses PawnIO (which is a safe and certified driver) to access the entire EC Chip. (might work for other EC chips as well)
 
 Use the Up & Down keys to navigate.
 
