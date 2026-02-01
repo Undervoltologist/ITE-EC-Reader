@@ -4,6 +4,6 @@ Uses PawnIO (which is a safe and certified driver) to access the entire EC Chip.
 
 Use the Up & Down keys to navigate.
 
-<img width="1857" height="912" alt="image" src="https://github.com/user-attachments/assets/0c3f7b73-f7af-4fcc-9e74-1edc6c597b06" />
+<img width="1852" height="909" alt="image" src="https://github.com/user-attachments/assets/fffa6015-4de7-4b7e-8eda-cdb781450a0f" />
 
 # DISCLAIMER: USE AT YOUR OWN RISK. IM NOT RESPONSIBLE FOR ANY ISSUES CAUSED BY THIS. THIS IS JUST A POC (PROOF OF CONCEPT)
