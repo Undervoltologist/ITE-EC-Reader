@@ -124,7 +124,8 @@ public class Program
     public static void ShowDataFromEc(byte[] currentData, ushort startAddress, ushort page)
     {
         ushort currentBaseAddr = (ushort)(startAddress + page * 0x100);
-        byte dcr4, dcr5, dcr6, ctr0, chipRev;
+        byte ctr0, ctr1, ctr2, ctr3, chipRev;
+        byte[] dcr;
         int rpm0, rpm1, rpm2;
         string chipIdHex;
 
@@ -134,9 +135,10 @@ public class Program
             chipIdHex = $"{idData[0]:X2}{idData[1]:X2}";
             chipRev = idData[2];
             ctr0 = PawnIO.DirectEcRead(globalVariables.ActiveAddr, globalVariables.ActiveData, 0x1801);
-            dcr4 = PawnIO.DirectEcRead(globalVariables.ActiveAddr, globalVariables.ActiveData, 0x1806);
-            dcr5 = PawnIO.DirectEcRead(globalVariables.ActiveAddr, globalVariables.ActiveData, 0x1807);
-            dcr6 = PawnIO.DirectEcRead(globalVariables.ActiveAddr, globalVariables.ActiveData, 0x1808);
+            ctr1 = PawnIO.DirectEcRead(globalVariables.ActiveAddr, globalVariables.ActiveData, 0x1841);
+            ctr2 = PawnIO.DirectEcRead(globalVariables.ActiveAddr, globalVariables.ActiveData, 0x1842);
+            ctr3 = PawnIO.DirectEcRead(globalVariables.ActiveAddr, globalVariables.ActiveData, 0x1843);
+            dcr = PawnIO.DirectEcReadArray(globalVariables.ActiveAddr, globalVariables.ActiveData, 0x1802, 8);
             rpm0 = GetRpm(0x181E, 0x181F);
             rpm1 = GetRpm(0x1820, 0x1821);
             rpm2 = GetRpm(0x1845, 0x1846);
@@ -187,33 +189,31 @@ public class Program
             Console.WriteLine("   ");
         }
 
-        // ec info output
+        // ITE EC info output
         Console.ForegroundColor = ConsoleColor.Black;
         string border = new string('=', 140);
         Console.WriteLine("\n" + border);
 
         Console.Write(" CHIP: ");
         Console.ForegroundColor = ConsoleColor.DarkGreen; Console.Write($"ITE {chipIdHex}");
-        Console.ForegroundColor = ConsoleColor.Black; Console.Write(" | CHIP REV: ");
+        Console.ForegroundColor = ConsoleColor.Black; Console.Write(" | CHIP REVISION: ");
         Console.ForegroundColor = ConsoleColor.DarkGreen; Console.Write($"0x{chipRev:X2}");
         Console.ForegroundColor = ConsoleColor.Black;
-        Console.WriteLine($" | ADDR: 0x{currentBaseAddr:X4} | PAGE: {page} | PORTS: {globalVariables.ActiveAddr:X2}/{globalVariables.ActiveData:X2}");
+        Console.WriteLine($" | ADDRESS: 0x{currentBaseAddr:X4} | PAGE: {page:D3} | PORTS: {globalVariables.ActiveAddr:X2}/{globalVariables.ActiveData:X2} | Use Up & Down keys to navigate.");
 
         Console.Write(" PWM STATUS: ");
         Console.ForegroundColor = ConsoleColor.DarkMagenta;
-        Console.Write($"CTR0 (PWM Max): {ctr0:D3} | ");
+        Console.Write($"CTR (PWM Scale): {ctr0:D3} {ctr1:D3} {ctr2:D3} {ctr3:D3} | ");
         Console.ForegroundColor = ConsoleColor.Blue;
-        Console.Write($"DCR4: {dcr4:D3} ({Math.Round((dcr4 / pwmScale) * 100, 1)}%)  ");
-        Console.Write($"DCR5: {dcr5:D3} ({Math.Round((dcr5 / pwmScale) * 100, 1)}%)  ");
-        Console.Write($"DCR6: {dcr6:D3} ({Math.Round((dcr6 / pwmScale) * 100, 1)}%)  ");
+        Console.Write($"DCR (PWM Duty): {string.Join(" ", dcr.Select(b => b.ToString("D3")))} ");
         Console.WriteLine();
 
         Console.ForegroundColor = ConsoleColor.Black;
-        Console.Write(" FANS (RPM):  ");
+        Console.Write(" FANS:  ");
         Console.ForegroundColor = ConsoleColor.DarkRed;
-        Console.Write($"TACH0: {rpm0} RPM  |  ");
-        Console.Write($"TACH1: {rpm1} RPM  |  ");
-        Console.Write($"TACH2: {rpm2} RPM  ");
+        Console.Write($"TACH0: {rpm0:D4} RPM  |  ");
+        Console.Write($"TACH1: {rpm1:D4} RPM  |  ");
+        Console.Write($"TACH2: {rpm2:D4} RPM  ");
 
         Console.ForegroundColor = ConsoleColor.Black;
         Console.WriteLine("\n" + border);
@@ -228,7 +228,7 @@ public class Program
         byte hi = PawnIO.DirectEcRead(globalVariables.ActiveAddr, globalVariables.ActiveData, hiAddr);
         int combined = low + (hi << 8);
         if (combined <= 0 || combined == 0xFFFF) return 0;
-        return 2156250 / combined; // divide by 0x2E6DA to get RPM
+        return 2156250 / combined; // divide by 0x20E6DA to get RPM
     }
 
     private static void SetDataColor(byte val, int index)
