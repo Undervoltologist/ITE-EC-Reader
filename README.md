@@ -1,7 +1,7 @@
 # ITE EC Reader 
 
 Uses PawnIO to access the entire EC Chip. Install it here: https://pawnio.eu/
-(might work for other EC chips as well, expect issues with the chip name and etc though)
+(should work for other EC chips as well, expect issues with the chip name and etc though)
 
 Use the Up & Down keys to navigate.
 
