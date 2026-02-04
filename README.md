@@ -1,6 +1,7 @@
 # ITE EC Reader 
 
-Uses PawnIO to access the entire EC Chip. Install it here: https://pawnio.eu/
+Uses PawnIO to access the entire EC Data Memory Space. Install it here: https://pawnio.eu/
+Also needs .NET 8: https://dotnet.microsoft.com/en-us/download/dotnet/thank-you/runtime-desktop-8.0.23-windows-x64-installer
 (should work for other EC chips as well, expect issues with the chip name and etc though)
 
 Use the Up & Down keys to navigate.
