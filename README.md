@@ -2,7 +2,6 @@
 
 Uses PawnIO to read and write to the EC chip. Install PawnIO here: https://pawnio.eu/
 Also needs .NET 8: https://dotnet.microsoft.com/en-us/download/dotnet/thank-you/runtime-desktop-8.0.23-windows-x64-installer
-(should work for other EC chips as well, expect issues with the chip name and etc on chips that aren't ITE)
 
 Use the Up & Down keys to navigate.
 
