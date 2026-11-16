@@ -5,6 +5,7 @@ Also needs .NET 8: https://dotnet.microsoft.com/en-us/download/dotnet/thank-you/
 
 Use the Up & Down keys to navigate.
 
-<img width="1847" height="910" alt="image" src="https://github.com/user-attachments/assets/8b7dcd65-b925-4b74-927c-7bc3fb0855a2" />
+<img width="782" height="388" alt="image" src="https://github.com/user-attachments/assets/f18e3513-ce24-40a6-b0d4-49475a4a76ac" />
+
 
 # DISCLAIMER: USE AT YOUR OWN RISK. IM NOT RESPONSIBLE FOR ANY ISSUES CAUSED BY THIS SOFTWARE.
