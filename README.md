@@ -1,7 +1,9 @@
 # ITE EC Reader 
 
-Uses PawnIO to read and write to the EC chip. Install PawnIO here: https://pawnio.eu/
-Also needs .NET 8: https://dotnet.microsoft.com/en-us/download/dotnet/thank-you/runtime-desktop-8.0.23-windows-x64-installer
+Uses PawnIO to read and write to the EC chip. 
+Install PawnIO here: https://pawnio.eu/
+
+.NET 8 is required for the app to run: https://dotnet.microsoft.com/en-us/download/dotnet/thank-you/runtime-desktop-8.0.23-windows-x64-installer
 
 Use the Up & Down keys to navigate.
 
