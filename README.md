@@ -7,8 +7,6 @@ Install PawnIO here: https://pawnio.eu/
 
 <img width="1439" height="899" alt="image" src="https://github.com/user-attachments/assets/55adb752-b070-4662-8ac2-3e663972f45e" />
 
-v2.0 is a WPF desktop app (v1 was a console app).
-
 ## Features
 
 - **Hex grid** of the current 256-byte page with HEX/DEC toggle and an ASCII strip.
