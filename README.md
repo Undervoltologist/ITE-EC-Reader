@@ -45,6 +45,6 @@ the first time you press Enter on an edited byte.
 | `Ctrl+L` / `Ctrl+M` | LPC devices / EC RAM view |
 | `Ctrl+G` | Go to address |
 
-# DISCLAIMER: USE AT YOUR OWN RISK. IM NOT RESPONSIBLE FOR ANY ISSUES CAUSED BY THIS.
+v1.0 (deprecated): <img width="782" height="388" alt="Screenshot 2026-11-16 134319" src="https://github.com/user-attachments/assets/32a94bca-56d9-4c42-bd64-a8df61373556" />
 
 # DISCLAIMER: USE AT YOUR OWN RISK. IM NOT RESPONSIBLE FOR ANY ISSUES CAUSED BY THIS SOFTWARE.
